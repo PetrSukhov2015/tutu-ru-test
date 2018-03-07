@@ -13,7 +13,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.appium.java_client.PressesKeyCode;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
@@ -39,15 +41,50 @@ public class AndroidAppSearchTest {
 			
 			//System.out.println(e.toString());
 			if (i==0){
-				e.sendKeys("London");				
+				e.clear();
+				e.sendKeys("Лондон");
+				//e.sendKeys("London");
+				//e.sendKeys("\uD09B");
 			}
 			if (i==1){
-				e.sendKeys("Paris");				
+				e.clear();
+				e.sendKeys("Париж");
+				//e.sendKeys("Paris");
+				//e.sendKeys("uПариж");
+				break;
 			}
-				i++;		
+			i++;		
+			
+		}
+		((PressesKeyCode) driver).pressKeyCode(AndroidKeyCode.BACK);
+		((PressesKeyCode) driver).pressKeyCode(AndroidKeyCode.BACK);
+		//driver.findElement(By.id("ru.tutu.tutu_emp:id/navigation_main")).click();
+		
+		/*
+		
+		*/
+		//ru.tutu.tutu_emp:id/icon
+		//((PressesKeyCode) driver).pressKeyCode(AndroidKeyCode.BACK);		
+		driver.findElement(By.className("android.view.ViewGroup")).click();
+		
+		
+		
+		List<WebElement> icons = driver.findElements(By.className("android.widget.FrameLayout"));
+		int i2=0;
+		String text = null;
+		for (WebElement icon: icons){
+			
+			//System.out.println(e.toString());
+			if (i2==6){
+				text = icon.getText();			
+			}			
+			i2++;	
 			
 		}
 		
+		
+		//String text = driver.findElement(By.className("android.widget.RelativeLayout")).getText();
+		System.out.println(text);
 		//driver.findElement(By.id("ru.tutu.tutu_emp:id/left_part_header")).click();
 		Thread.sleep(3000);
 		//"ru.tutu.tutu_emp:id/city_name"[0]

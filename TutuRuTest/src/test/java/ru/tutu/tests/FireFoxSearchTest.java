@@ -24,34 +24,12 @@ public class FireFoxSearchTest {
 
 	@Test
 	public void test() throws InterruptedException {
-		System.out.println("t");
-		//avia
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div[4]/div/div[1]/div[2]")).click();
-
-		//from
-		driver.findElement(By.xpath("/html/body/div[1]/div[5]/div/div[1]/div[2]/div[2]/div[1]/div[1]/input")).clear();
-		driver.findElement(By.xpath("/html/body/div[1]/div[5]/div/div[1]/div[2]/div[2]/div[1]/div[1]/input")).sendKeys("Москва");
-		//driver.findElement(By.className("b-input__form__standart m-train_form j-input_wrapper")).sendKeys("Москва");
-		
-		//to
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div[5]/div/div[1]/div[2]/div[2]/div[3]/div[1]/input")).clear();
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div[5]/div/div[1]/div[2]/div[2]/div[3]/div[1]/input")).sendKeys("Ница");
-		
-		//date
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div[5]/div/div[1]/div[2]/div[2]/div[4]/div[1]")).click();
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("ui-datepicker-div")));
-		//*[@id="ui-datepicker-div"]
-		driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[2]/td[1]/a")).click();
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div[5]/div/div[1]/div[2]/div[2]/div[7]/button/span/span[3]")).click();
-		Thread.sleep(3000);
-
-		
-		String text = driver.findElement(By.xpath("/html/body/div[2]/div[6]/div[1]/div[2]/div[4]/div[9]/div/div[1]") ).getText();
-		System.out.println(text);
-		Assert.assertNotNull(text);
-		Thread.sleep(3000);
-		//Assert.assertEquals(true,				);
+		//search avia
+		PageSearch ps = new PageSearch(driver);
+		ps.searchAviaOneWaySmokeTest("Москва","Ница");
+		//check result
+		PageSearchResult sr = new PageSearchResult(driver);
+		Assert.assertNotNull( sr.check() );
 		
 		
 	}
